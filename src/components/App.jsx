@@ -40,7 +40,7 @@ export default function App() {
   return (
     <>
       <div>
-        <h1>Phonebook</h1>
+        <h1 className="title">Phonebook</h1>
         <ContactForm onAddContact={onAddContact} />
         <SearchBox value={searchContact} onChange={handleSearch} />
         <ContactList
