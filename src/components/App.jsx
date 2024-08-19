@@ -3,12 +3,19 @@ import ContactList from "./ContactList/ContactList";
 import SearchBox from "./SearchBox/SearchBox";
 import "./App.css";
 import dataPhone from "../db/contacts.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 
 export default function App() {
   const [searchContact, setSearchContact] = useState("");
-  const [contacts, setContacts] = useState(dataPhone);
+  const [contacts, setContacts] = useState(() => {
+    const savedContacts = localStorage.getItem("saved-contacts");
+    return savedContacts ? JSON.parse(savedContacts).contacts : dataPhone;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("saved-contacts", JSON.stringify({ contacts }));
+  }, [contacts]);
 
   const handleSearch = (evt) => {
     setSearchContact(evt.target.value);
@@ -20,8 +27,8 @@ export default function App() {
 
   const onAddContact = (contact) => {
     const finalContact = {
-      ...contact,
       id: nanoid(),
+      ...contact,
     };
     setContacts([...contacts, finalContact]);
   };
