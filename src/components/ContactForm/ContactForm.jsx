@@ -26,7 +26,6 @@ const ContactForm = ({ onAddContact }) => {
       name: values.name,
       number: values.number,
     };
-    console.log(values);
 
     onAddContact(contactObject);
 

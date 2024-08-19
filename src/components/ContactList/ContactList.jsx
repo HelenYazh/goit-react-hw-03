@@ -1,6 +1,6 @@
 import Contact from "../Contact/Contact";
 
-const ContactList = ({ list }) => {
+const ContactList = ({ list, onDeleteContact }) => {
   return list.map((contact) => {
     return (
       <Contact
@@ -8,6 +8,7 @@ const ContactList = ({ list }) => {
         id={contact.id}
         name={contact.name}
         number={contact.number}
+        onDeleteContact={onDeleteContact}
       />
     );
   });

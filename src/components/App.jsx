@@ -23,9 +23,11 @@ export default function App() {
       ...contact,
       id: nanoid(),
     };
-    console.log(finalContact);
-
     setContacts([...contacts, finalContact]);
+  };
+
+  const onDeleteContact = (contactId) => {
+    setContacts(contacts.filter((contact) => contact.id !== contactId));
   };
 
   return (
@@ -34,7 +36,10 @@ export default function App() {
         <h1>Phonebook</h1>
         <ContactForm onAddContact={onAddContact} />
         <SearchBox value={searchContact} onChange={handleSearch} />
-        <ContactList list={searchedContacts} />
+        <ContactList
+          list={searchedContacts}
+          onDeleteContact={onDeleteContact}
+        />
       </div>
     </>
   );
